@@ -1,0 +1,27 @@
+// rem has better support for accessability
+
+html {
+    font-size: 62.5%; //working with rems in a base 10 system just like pixels 
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    font-weight: bold;
+}
+
+// for react-dates
+*, *:before, *:after {
+    box-sizing: border-box;
+}
