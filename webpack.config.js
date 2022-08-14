@@ -1,4 +1,6 @@
 const path = require('path')
+
+// extracting the css from bundle.js to reduce its size
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = (env, argv) => {
