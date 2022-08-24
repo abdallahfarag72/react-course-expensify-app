@@ -1,9 +1,9 @@
 const path = require('path')
+const webpack = require('webpack')
+
 
 // extracting the css from bundle.js to reduce its size
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { webpack } = require('webpack')
-const { json } = require('express')
 
 // configuring environment variable to set things up for the testing database
 process.env.NODE.ENV = process.env.NODE.ENV || 'development'
