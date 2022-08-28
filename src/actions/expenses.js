@@ -37,6 +37,14 @@ export const removeExpense = ({ id } = {}) => ({
     id
 })
 
+export const startRemoveExpense = ({ id } = {}) => {
+    return (dispatch) => {
+        return remove(ref(database, `expenses/${id}`)).then(() => {
+            dispatch(removeExpense({ id }))
+        })
+    }
+}
+
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
     type: 'EDIT_EXPENSE',
@@ -62,16 +70,5 @@ export const startSetExpenses = () => {
             });
             dispatch(setExpenses(expenses))
         })
-        // return onValue(ref(database, 'expenses'), (snapshot) => {
-        //     snapshot.forEach(childSnapshot => {
-        //         expenses.push({
-        //             id: childSnapshot.key,
-        //             ...childSnapshot.val()
-        //         })
-        //     });
-        //     dispatch(setExpenses(expenses))
-        // }, {
-        //     onlyOnce: true
-        // })
     }
 }

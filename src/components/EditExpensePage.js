@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import ExpenseForm from "./ExpenseForm";
-import { editExpense, removeExpense } from "../actions/expenses";
+import { editExpense, startRemoveExpense } from "../actions/expenses";
 import { useNavigate } from "react-router-dom";
 
 export class EditExpensePage extends React.Component {
@@ -11,7 +11,7 @@ export class EditExpensePage extends React.Component {
         this.props.navigate('/')
     }
     onClick = () => {
-        this.props.removeExpense({ id: this.props.id })
+        this.props.startRemoveExpense({ id: this.props.id })
         this.props.navigate('/')
     }
 
@@ -53,7 +53,7 @@ const WithNavigateAndParams = (props) => {
 
 const mapDispatchToProp = (dispatch) => ({
     editExpense: (id, expense) => dispatch(editExpense(id, expense)),
-    removeExpense: ({ id }) => dispatch(removeExpense({ id }))
+    startRemoveExpense: ({ id }) => dispatch(startRemoveExpense({ id }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProp)(WithNavigateAndParams)
