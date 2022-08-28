@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import database from "../firebase/firebase";
-import { getDatabase, ref, set, remove, update, onValue, off, push, onChildRemoved, onChildChanged, onChildAdded } from "firebase/database";
+import { getDatabase, ref, set, remove, update, onValue, off, push, onChildRemoved, onChildChanged, onChildAdded, get } from "firebase/database";
 
 
 // -------Action Generators for Expenses-------
@@ -43,3 +43,35 @@ export const editExpense = (id, updates) => ({
     id,
     updates
 })
+
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+})
+
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        const expenses = []
+        return get(ref(database, 'expenses')).then((snapshot) => {
+            snapshot.forEach(childSnapshot => {
+                expenses.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                })
+            });
+            dispatch(setExpenses(expenses))
+        })
+        // return onValue(ref(database, 'expenses'), (snapshot) => {
+        //     snapshot.forEach(childSnapshot => {
+        //         expenses.push({
+        //             id: childSnapshot.key,
+        //             ...childSnapshot.val()
+        //         })
+        //     });
+        //     dispatch(setExpenses(expenses))
+        // }, {
+        //     onlyOnce: true
+        // })
+    }
+}
