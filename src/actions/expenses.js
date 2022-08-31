@@ -12,7 +12,7 @@ export const addExpense = (expense) => ({
 })
 
 export const startAddExpense = (expenseData = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const {
             description = '', 
             note = '', 
@@ -22,7 +22,9 @@ export const startAddExpense = (expenseData = {}) => {
         
         const expense = { description, note, amount, createdAt }
 
-        return push(ref(database, 'expenses'), expense).then((ref) => {
+        const uid = getState().auth.uid
+
+        return push(ref(database, `users/${uid}/expenses`), expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
@@ -38,8 +40,9 @@ export const removeExpense = ({ id } = {}) => ({
 })
 
 export const startRemoveExpense = ({ id } = {}) => {
-    return (dispatch) => {
-        return remove(ref(database, `expenses/${id}`)).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return remove(ref(database, `users/${uid}/expenses/${id}`)).then(() => {
             dispatch(removeExpense({ id }))
         })
     }
@@ -53,8 +56,9 @@ export const editExpense = (id, updates) => ({
 })
 
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-        return update(ref(database, `expenses/${id}`), updates).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return update(ref(database, `users/${uid}/expenses/${id}`), updates).then(() => {
             dispatch(editExpense(id, updates))
         })
     }
@@ -67,9 +71,10 @@ export const setExpenses = (expenses) => ({
 })
 
 export const startSetExpenses = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const expenses = []
-        return get(ref(database, 'expenses')).then((snapshot) => {
+        const uid = getState().auth.uid
+        return get(ref(database, `users/${uid}/expenses`)).then((snapshot) => {
             snapshot.forEach(childSnapshot => {
                 expenses.push({
                     id: childSnapshot.key,
