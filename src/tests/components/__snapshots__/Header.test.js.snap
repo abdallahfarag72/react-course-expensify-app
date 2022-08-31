@@ -9,7 +9,7 @@ exports[`should render Header correctly 1`] = `
     className={[Function]}
     to="/"
   >
-    Home
+    Dashboard
   </NavLink>
   <NavLink
     className={[Function]}
@@ -17,5 +17,10 @@ exports[`should render Header correctly 1`] = `
   >
     create Expense
   </NavLink>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
 </header>
 `;
