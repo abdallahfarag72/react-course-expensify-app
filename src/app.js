@@ -5,13 +5,13 @@ import AppRouter, { history } from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import { login, logout } from "./actions/auth";
-import getVisibleExpenses from "./selectors/expenses";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 import 'react-dates/lib/css/_datepicker.css'
 import 'react-dates/initialize';
 import { auth } from "./firebase/firebase";
-import { GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import LoadingPage from "./components/LoadingPage";
 
 
 const store = configureStore()
@@ -30,7 +30,7 @@ const renderApp = () => {
     }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
