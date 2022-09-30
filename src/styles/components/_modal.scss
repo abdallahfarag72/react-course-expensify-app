@@ -1,0 +1,36 @@
+.ReactModalPortal>div {
+    // targetint the divs that are direct accendants not children of children
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    align-items: center; // center vertically
+    display: flex;
+    justify-content: center; // center horizontally
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.modal {
+    background: $light-blue;
+    color: white;
+    max-width: 30rem;
+    padding: $m-size;
+    text-align: center;
+}
+
+.modal__title {
+    margin: 0 0 $l-size 0;
+}
+
+.modal__buttons {
+    display: flex;
+    justify-content: space-around;
+}

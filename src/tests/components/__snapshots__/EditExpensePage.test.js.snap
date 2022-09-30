@@ -27,6 +27,11 @@ exports[`should render EditExpensePage correctly 1`] = `
     >
       Remove Expense
     </button>
+    <RemoveModal
+      handleRemoveModal={[Function]}
+      modalOpen={false}
+      onRemove={[Function]}
+    />
   </div>
 </div>
 `;

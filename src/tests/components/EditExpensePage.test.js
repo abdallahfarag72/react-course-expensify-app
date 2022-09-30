@@ -21,9 +21,3 @@ test('should handle editExpense', () => {
     expect(startEditExpense).toHaveBeenLastCalledWith(id.id, expenses[1])
     expect(navigate).toHaveBeenLastCalledWith('/')
 })
-
-test('should handle remove expense', () => {
-    wrapper.find('button').prop('onClick')()
-    expect(startRemoveExpense).toHaveBeenLastCalledWith(id)
-    expect(navigate).toHaveBeenLastCalledWith('/')
-})
